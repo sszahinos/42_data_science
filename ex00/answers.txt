@@ -1,0 +1,10 @@
+• Mostrar una lista de los paquetes instalados y sus versiones.
+pip list
+• Mostrar los metadatos del paquete numpy.
+pip show numpy
+• Elimina el paquete numpy.
+pip uninstall numpy
+• (Re)instala el paquete numpy.
+pip install numpy
+• Congela tus paquetes python y sus versiones en un archivo requirements.txt que tienes que entregar.
+pip freeze > requirements.txt
