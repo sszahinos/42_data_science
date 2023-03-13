@@ -1,11 +1,24 @@
 import sys
 
-def text_analyzer(text: str):
+
+
+def text_analyzer(text=None):
+    """This function counts the number of upper characters, lower characters,
+punctuation and spaces in a given text."""
     lower = 0
     upper = 0
     sign = 0
     space = 0
 
+    if text == None:
+        print("What is the text to analyze?")
+        return
+    try:
+        number = int(text)
+        print("AssertionError: argument is not a string")
+        return
+    except ValueError:
+        pass
     for ch in text:
         if ch.islower():
             lower += 1
