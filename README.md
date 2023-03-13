@@ -1,7 +1,6 @@
 # 42_data_science
 
-Module 00
-Markup :
+## Module 00
 * Ex00: Basic Python configuration
 * Ex01: Arguments passed by the user. String manipulation.
 * Ex02: Arguments checking. Integer classification.
