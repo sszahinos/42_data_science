@@ -28,21 +28,30 @@ class Bank(object):
                 return True
         return False
     
-    def __find_atribute(self, name):
-        for acc in self.accounts:
-            if acc.__dict__.pop(name):
-                return True
-        return False
+    #def __get_account(self, name):
+    #    for acc in self.accounts:
+    #        if acc.name == name:
+    #            return self.accounts.pop(name)
+    #    return None
+    
+    #def __find_atribute(self, name):
+    #    for acc in self.accounts:
+    #        if acc.__dict__.pop(name):
+    #            return True
+    #    return False
 
     def add(self, new_account):
         """ Add new_account in the Bank
         @new_account: Account() new account to append
         @return True if success, False if an error occured"""
-        if AccountChecker.account_is_valid(new_account) and\
-                not self.__account_exists(new_account.name):
-            self.accounts.append(new_account)
-            return True
-        return False
+        if not AccountChecker.account_is_valid(new_account):
+            print("ERROR: Account not valid.")
+            return False
+        if self.__account_exists(new_account.name):
+            print("ERROR: Account already exists.")
+            return False
+        self.accounts.append(new_account)
+        return True
 
     def transfer(self, origin, dest, amount):
         """" Perform the fund transfer
@@ -61,16 +70,31 @@ class Bank(object):
                 dest.value += amount
                 return True
         return False
-        
-
+    
     def fix_account(self, name):
         """ fix account associated to name if corrupted
         @name: str(name) of the account
         @return True if success, False if an error occured
         """
         if isinstance(name, str) and\
-                self.__find_atribute(name):
-            ?????????????
+                self.__account_exists(name):
+            #print("TR:> ", self.accounts[0])
+            ##for index, acc in enumerate(self.accounts):
+            ##    print(len(acc.__dict__))
+            ##    for x in reversed(range(0, len(acc.__dict__))):
+            ##        print("TR> ", self.accounts[index].__dict__[x])
+            #for index, atr in reversed(list(enumerate(self.accounts[name].__dict__))):
+            #    if atr.startswith("b"):
+            #        del self.accounts[name].__dict__[index]
+            #atr = self.accounts[name].__dict__
+            #if not hasattr(self.accounts[name], "zip"):
+            #    self.accounts[name].zip = ""
+            #if not hasattr(self.accounts[name], "addr"):
+            #    self.accounts[name].addr = ""
+            return True
+        return False
+
+            
 
 
 class AccountChecker():
@@ -88,31 +112,47 @@ class AccountChecker():
 
 
     def __check_mandatory_atr(acc: Account):
-        if not acc.__dict__.pop("name") or\
-        not acc.__dict__.pop("id") or\
-        not acc.__dict__.pop("value"):
+        if not hasattr(acc, "name") or\
+        not hasattr(acc, "id") or\
+        not hasattr(acc, "value"):
             return False
         return True
 
     def account_is_corrupted(acc: Account):
-        if len(acc.__dict__) % 2 == 0 or\
-                AccountChecker.__find_b_atribute(acc) or\
-                not AccountChecker.__find_atr(acc, 'zip') or\
-                not AccountChecker.__find_atr(acc, 'addr') or\
-                not AccountChecker.__check_mandatory_atr(acc) or\
-                not isinstance(acc.name, str) or\
-                not isinstance(acc.id, int) or\
-                (not isinstance(acc.value, int) or not isinstance(acc.value, float)):
-            print("ERROR: Account not valid")
-
-    def account_is_valid(acc: Account):
-        if isinstance(acc, Account) and\
-                not AccountChecker.account_is_corrupted:
+        if len(acc.__dict__) % 2 == 0:
+            print("ERROR: Account has odd atributes.")
+            return True
+        if AccountChecker.__find_b_atribute(acc):
+            print("ERROR: Has an atribute starting with B")
+            return True
+        if not AccountChecker.__find_atr(acc, 'zip'):
+            print("ERROR: No ZIP")
+            return True
+        if not AccountChecker.__find_atr(acc, 'addr'):
+            print("ERROR: No ADDR")
+            return True
+        if not AccountChecker.__check_mandatory_atr(acc):
+            print("ERROR: Not mandatory atributes.")
+            return True
+        if not isinstance(acc.name, str):
+            print("ERROR: name is not a string")
+            return True
+        if not isinstance(acc.id, int):
+            print("ERROR: id is not an int")
+            return True
+        if (not isinstance(acc.value, int) and not isinstance(acc.value, float)):
+            print("ERROR: Incorrect value type.")
             return True
         return False
+
+    def account_is_valid(acc: Account):
+        if not isinstance(acc, Account):
+            print("ERROR: Account is not an Account instance.")
+            return False
+        if AccountChecker.account_is_corrupted(acc):
+            return False
+        return True
         
 
 
-## TEST
-acc = Account("test", arg2="ta2", arg3="ta3")
-AccountChecker.account_is_corrupted(acc)
+
