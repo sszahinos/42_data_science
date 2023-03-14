@@ -12,3 +12,10 @@
 * Ex08: Text-to-Morse
 * Ex09: Number guesser
 * Ex10: Use of the "tqdm" library for displaying a loading bar.
+## Module 01
+* Ex00: Basic class management. List of recipes in a book.
+* Ex01: Inheritance. GoT houses.
+* Ex02: [Not finished yet]
+* Ex03: Playing with a text. Spliting, ordering, shuffling and "uniqueing" (manual random)
+* Ex04: Use of enumerate and zip functions.
+* Ex05: [Almost finished] Account creation and validation. These accounts are stored in a bank, which manages transactions and registers.
