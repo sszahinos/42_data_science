@@ -19,3 +19,10 @@
 * Ex03: Playing with a text. Spliting, ordering, shuffling and "uniqueing" (manual random)
 * Ex04: Use of enumerate and zip functions.
 * Ex05: [Almost finished] Account creation and validation. These accounts are stored in a bank, which manages transactions and registers.
+## Module 02
+* Ex00: Custom map, filter and reduce functions. Lambda function.
+* Ex01: *args and **kwargs. Object modification (atributes).
+* Ex02: Custom logger using decorators. File I/O. OS info.
+* Ex03: Custom context manager. CSV reader.
+* Ex04: Project packaging management. Metadata.
+* Ex05: Class with custom functions to do statistics.
