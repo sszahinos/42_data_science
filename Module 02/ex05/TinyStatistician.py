@@ -12,7 +12,6 @@ class TinyStatistician():
         else:
             for num in mat:
                 count +=1
-        print("TR cols: ", count)
         return count
 
     def get_rows(self, mat):
@@ -22,7 +21,6 @@ class TinyStatistician():
                 count += 1
         else:
             count =1
-        print("TR rows: ", count)
         return count
     
     def sum_mat(self, mat):
@@ -48,22 +46,19 @@ class TinyStatistician():
             lst = [j for row in x for j in row]
         lst.sort()
         if len(lst) % 2 != 0:
-            return float(lst[int(len(lst) / 2)])
-        return (lst[math.floor(int(len(lst) / 2))] + lst[math.ceil(int(len(lst) / 2))]) / 2.0 # Mean function could be used
+            return float(lst[math.ceil((len(lst) - 1) / 2)])
+        return (lst[math.floor((len(lst) - 1) / 2)] + lst[math.ceil((len(lst) - 1) / 2)]) / 2.0 # Mean function could be used
 
     def quartile(self, x):
         lst = x
         if isinstance(x[0], list):
             lst = [j for row in x for j in row]
         lst.sort()
-        q1_index = len(lst) / 4.0
-        print("TR: ", q1_index)
-        print("TR2: ", len(lst) % 2)
+        q1_index = (len(lst) - 1) / 4.0
         if len(lst) % 2 != 0:
             return [float(lst[math.floor(q1_index)]), float(lst[math.ceil(q1_index * 2)])]
-        print("TR: PAR")
-        return [(lst[math.floor(q1_index)] + lst[math.ceil(q1_index)]) / 2.0,
-                (lst[math.floor(q1_index * 2)] + lst[math.ceil(q1_index * 2)]) / 2.0]
+        return [self.mean([lst[math.floor(q1_index)], lst[math.ceil(q1_index)]]),
+                self.mean([lst[math.floor(q1_index * 3)], lst[math.ceil(q1_index * 3)]])]
 
 
     def var(x):
@@ -75,7 +70,7 @@ class TinyStatistician():
 ## TEST
 tstat = TinyStatistician()
 a = [1, 42, 300, 10, 59]
-b = [1, 42, 300, 10, 59, 5]
+b = [1, 42, 300, 10, 59, 5, 26, 78]
 print("A> ", a)
 print("Mean: 82.4 - ", tstat.mean(a))
 print("Median: 42.0 - ", tstat.median(a))
@@ -86,6 +81,6 @@ print("Quartile: [10.0, 59.0] - ", tstat.quartile(a))
 # Expected result: 110.81263465868862
 print("--------------------------------------------")
 print("B> ", b)
-print("Mean: 69.5 - ", tstat.mean(a))
-print("Median: 26.0 - ", tstat.median(a))
-print("Quartile: [4.0, 119.25] - ", tstat.quartile(a))
+print("Mean: 65.125 - ", tstat.mean(b))
+print("Median: 34.0 - ", tstat.median(b))
+print("Quartile: [7.5, 68.5] - ", tstat.quartile(b))
