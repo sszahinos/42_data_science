@@ -60,12 +60,28 @@ class TinyStatistician():
         return [self.mean([lst[math.floor(q1_index)], lst[math.ceil(q1_index)]]),
                 self.mean([lst[math.floor(q1_index * 3)], lst[math.ceil(q1_index * 3)]])]
 
+    def var(self, x):
+        lst = x
+        if isinstance(x[0], list):
+            lst = [j for row in x for j in row]
+        lst.sort()
+        mean = self.mean(lst)
+        result = 0
+        for value in lst:
+            result += math.pow(value - mean, 2)
+        return result / len(lst)
 
-    def var(x):
-        pass
+    def std(self, x):
+        lst = x
+        if isinstance(x[0], list):
+            lst = [j for row in x for j in row]
+        lst.sort()
+        mean = self.mean(lst)
+        result = 0
+        for value in lst:
+            result += abs(math.pow(value - mean, 2))
+        return math.pow(result / len(lst), (1/2))
 
-    def std(x):
-        pass
 
 ## TEST
 tstat = TinyStatistician()
@@ -75,10 +91,9 @@ print("A> ", a)
 print("Mean: 82.4 - ", tstat.mean(a))
 print("Median: 42.0 - ", tstat.median(a))
 print("Quartile: [10.0, 59.0] - ", tstat.quartile(a))
-#tstat.var(a)
-# Expected result: 12279.439999999999
-#tstat.std(a)
-# Expected result: 110.81263465868862
+print("Var: 12279.439999999999 - ", tstat.var(a))
+print("STD: 110.81263465868862", tstat.std(a))
+
 print("--------------------------------------------")
 print("B> ", b)
 print("Mean: 65.125 - ", tstat.mean(b))
