@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=54.2.0", "pip>=21.0.1", "wheel>=0.36.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "my_minipack"
+version = "1.0.0"
+authors = [
+  { name = "sersanch", email = "sersanch@student.42barcelona.com" }
+]
+description = "Package example"
+readme = "README.md"
+requires-python = ">=3.7"
+license = {file = "LICENSE.txt"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+	"License :: OSI Approved :: MIT License",
+	"Development Status :: 3 - Alpha",
+	"Intended Audience :: Developers",
+	"Intended Audience :: Students",
+	"Topic :: Education",
+	"Topic :: HowTo",
+	"Topic :: Package"
+]
+
+[project.urls]
+"Homepage" = "https://github.com/sszahinos/42_data_science"
+"Subject" = "https://github.com/42-AI/bootcamp_python"
