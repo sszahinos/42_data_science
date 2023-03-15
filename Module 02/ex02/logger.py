@@ -3,9 +3,11 @@ import os
 
 def log(func):
 	def write_log(text):
-		f = open("machine.log", "a")
-		f.write(text)
-		f.close()
+		try:
+			f = open("machine.log", "a")
+			f.write(text)
+		finally:
+			f.close()
 
 	def log_register(*args, **kwargs):
 		start_time = time.time()
